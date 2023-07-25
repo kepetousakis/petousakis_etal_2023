@@ -15,6 +15,12 @@ import Code_General_Nassi_functions as nf
 import scipy.stats as stats
 import matplotlib as mpl
 import matplotlib.colors as mcolors
+import warnings
+import logging
+
+logging.getLogger('matplotlib.font_manager').disabled = True
+
+warnings.filterwarnings("ignore")
 
 font = {'family' : 'normal',
         'weight' : 'normal',
@@ -198,10 +204,10 @@ if __name__ == "__main__":
 				alldistances_fortext.append(distance)
 				
 			plt.axhline(0,0,1,c='k',ls='--')
-			plt.xlabel('Disparity ($^\circ$)', fontsize=18)
-			plt.ylabel('Neuronal orientation preference ($^\circ$)', fontsize=18)
-			plt.xticks(xax, fontsize=18)
-			plt.yticks(xax, fontsize=18)
+			plt.xlabel('Disparity ($^\circ$)', fontsize=16)
+			plt.ylabel('Neuronal orientation preference ($^\circ$)', fontsize=16)
+			plt.xticks(xax, fontsize=16)
+			plt.yticks(xax, fontsize=16)
 			plt.xlim(0,10*(len(yax)-1)+5)
 			plt.ylim(-5,max(max(yax)+5,40))
 			plt.fill_between(xax[0:len(yax)], yax, references[0,idx_c_ref,0:len(yax)], alpha=0.2, facecolor='k')

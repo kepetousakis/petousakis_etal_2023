@@ -62,7 +62,7 @@ def tuning_properties(data,X):
     if (np.size(id_pref)>1):
         #If their difference is less than 90 deg.
         if (id_pref[0][-1]-id_pref[0][0]<9):
-            id_pref=np.int(np.ceil(np.mean(id_pref)));
+            id_pref=np.ceil(np.mean(id_pref)).astype('int');  # changed "np.int" call to type conversion ".astype('int')", for numpy version compatibility
         else:
             id_pref=id_pref[0][0];
     else:

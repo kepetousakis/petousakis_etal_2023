@@ -11,10 +11,16 @@ import numpy as np
 from matplotlib import pyplot as plt
 from random import randint
 import matplotlib as mpl
+import warnings
+import logging
+
+logging.getLogger('matplotlib.font_manager').disabled = True
+
+warnings.filterwarnings("ignore")
 
 font = {'family' : 'normal',
         'weight' : 'normal',
-        'size'   : 18}
+        'size'   : 16}
 
 mpl.rc('font', **font)
 

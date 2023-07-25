@@ -9,14 +9,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 import Code_General_utility_spikes_pickling as util
 import matplotlib as mpl
+import warnings
+import logging
+
+logging.getLogger('matplotlib.font_manager').disabled = True
+
+warnings.filterwarnings("ignore")
 
 font = {'family' : 'normal',
         'weight' : 'normal',
-        'size'   : 18}
+        'size'   : 16}
 
 mpl.rc('font', **font)
 
-__RES_DPI = 48
+__RES_DPI = 48*0.75
 
 def count_cases(bins, labels, condition):
 	"""Given a set of bins, and their labels, counts number (and percentage) of cases (bins) whose labels satisfy a condition."""

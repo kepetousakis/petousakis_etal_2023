@@ -12,10 +12,16 @@ import matplotlib.pyplot as plt
 from copy import deepcopy as dcp
 import scipy.stats as stats
 import matplotlib
+import warnings
+import logging
+
+logging.getLogger('matplotlib.font_manager').disabled = True
+
+warnings.filterwarnings("ignore")
 
 font = {'family' : 'normal',
         'weight' : 'normal',
-        'size'   : 18}
+        'size'   : 16}
 
 matplotlib.rc('font', **font)
 
@@ -318,7 +324,8 @@ nnan = np.array([np.sum([1 for x in y if np.isnan(x)]) for y in OSIs_all])
 N = np.array([np.sqrt(10-x) if x < 10 else 1 for x in nnan])
 	
 print(f'Color {_COLORS[iC]} (case {case})')
-axOSI.bar([x for x in range(1,len(CASES)+1)], np.nanmean(OSIs_all, axis=1), width=0.2, align='center', yerr=np.nanstd(OSIs_all, axis=1)/N, color=['r','g'], capsize=5)
+# axOSI.bar([x for x in range(1,len(CASES)+1)], np.nanmean(OSIs_all, axis=1), width=0.2, align='center', yerr=np.nanstd(OSIs_all, axis=1)/N, color=['r','g'], capsize=5)
+axOSI.bar([x for x in range(1,len(CASES)+1)], np.nanmean(np.nan_to_num(OSIs_all, copy=True, nan=0.0), axis=1), width=0.2, align='center', yerr=np.nanstd(np.nan_to_num(OSIs_all, copy=True, nan=0.0), axis=1)/N, color=['r','g'], capsize=5)  # Handles RuntimeWarning with newer numpy versions
 axOSI.set_xticks([x for x in range(0,len(CASES)+1)],_labels)
 axOSI.set_ylabel('Mean OSI value')
 axOSI.set_ylim([0,1.05])

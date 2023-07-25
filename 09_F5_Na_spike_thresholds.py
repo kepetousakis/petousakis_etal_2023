@@ -6,7 +6,7 @@ import os
 import scipy.stats as stats
 
 
-_RES_DPI = 48*2
+_RES_DPI = 48
 
 _SAVEDATA = False
 
@@ -465,7 +465,7 @@ if __name__ == '__main__':
 	
 	compartment_names = dendrite_names + ['soma']
 			
-	amp_data = util.pickle_load('./data/F5/amp_data_thresholds.pickle')
+	amp_data = util.pickle_load('./Data/F5/amp_data_thresholds.pickle')
 
 	test = stats.ttest_ind	
 
@@ -586,7 +586,7 @@ if __name__ == '__main__':
 	data_basals = np.array(elc_basals)
 	data_apicals = np.array(elc_apicals)
 	
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Threshold difference as a function of ELC',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Figure 5C',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 	
 
 	# ===== Volume-normalized attenuation between apical and basal dendrites =====
@@ -601,7 +601,7 @@ if __name__ == '__main__':
 	data_basals = np.array(vol_basals)
 	data_apicals = np.array(vol_apicals)
 	
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Threshold difference as a function of volume',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Figure 5D',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 	
 	
 	# ===== Path-volume-normalized attenuation between apical and basal dendrites =====

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import os
 import scipy.stats as stats
 
-_RES_DPI = 48*2
+_RES_DPI = 48
 
 _SAVEDATA = False
 
@@ -463,7 +463,7 @@ if __name__ == '__main__':
 	
 	compartment_names = dendrite_names + ['soma']
 			
-	amp_data = util.pickle_load('./data/S8/amp_data_dspikes.pickle')
+	amp_data = util.pickle_load('./Data/S8/amp_data_dspikes.pickle')
 		
 
 	test = stats.ttest_ind	
@@ -513,12 +513,12 @@ if __name__ == '__main__':
 # 	figManager.window.showMaximized()
 # 	
 # 	
-# 	# ===== Amplitude difference (d-s) (no other var) =====
+# 	# ===== Attenuation (no other var) =====
 # 	fig, axes = plt.subplot_mosaic('AAB', dpi=_RES_DPI)
 # 	axScatter = axes['A']
 # 	axBoxplot = axes['B']
 # 	plt.sca(axScatter)
-# 	plt.title('Amplitude difference (d-s)')
+# 	plt.title('Attenuation')
 # 	plt.scatter(range_basals, amp_data[0:7,2],c='b', label='basal')
 # 	plt.scatter(range_apicals, amp_data[7:,2],c='r', label='apical')
 # 	plt.legend()
@@ -543,7 +543,7 @@ if __name__ == '__main__':
 	data_basals = np.array(dist_basals)
 	data_apicals = np.array(dist_apicals)
 	
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Amplitude difference (d-s) as a function of distance from the soma',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Attenuation as a function of distance from the soma',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 
 	
 
@@ -554,7 +554,7 @@ if __name__ == '__main__':
 	data_basals = np.array(len_basals)
 	data_apicals = np.array(len_apicals)
 	
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Amplitude difference (d-s) as a function of dendrite length',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Supplementary Figure 8B',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 
 
 	# ===== Diameter-normalized attenuation between apical and basal dendrites =====
@@ -564,7 +564,7 @@ if __name__ == '__main__':
 	data_basals = np.array(diam_basals)
 	data_apicals = np.array(diam_apicals)
 
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Amplitude difference (d-s) as a function of dendritic diameter',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Supplementary Figure 8A',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 
 
 	# ===== ELC-normalized attenuation between apical and basal dendrites =====
@@ -574,7 +574,7 @@ if __name__ == '__main__':
 	data_basals = np.array(elc_basals)
 	data_apicals = np.array(elc_apicals)
 	
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Amplitude difference (d-s) as a function of ELC',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Attenuation as a function of ELC',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 	
 
 	# ===== Volume-normalized attenuation between apical and basal dendrites =====
@@ -589,7 +589,7 @@ if __name__ == '__main__':
 	data_basals = np.array(vol_basals)
 	data_apicals = np.array(vol_apicals)
 	
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Amplitude difference (d-s) as a function of volume',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Attenuation as a function of volume',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 	
 	
 	# ===== Path-volume-normalized attenuation between apical and basal dendrites =====
@@ -618,7 +618,7 @@ if __name__ == '__main__':
 	data_basals = np.array(path_vol_basals)
 	data_apicals = np.array(path_vol_apicals)
 	
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Amplitude difference (d-s) as a function of path volume',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Attenuation as a function of path volume',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 	
 	
 	

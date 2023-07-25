@@ -13,9 +13,16 @@ from copy import deepcopy as dcp
 import scipy.stats as stats
 import matplotlib
 
+import warnings
+import logging
+
+logging.getLogger('matplotlib.font_manager').disabled = True
+
+warnings.filterwarnings("ignore")
+
 font = {'family' : 'normal',
         'weight' : 'normal',
-        'size'   : 18}
+        'size'   : 16}
 
 matplotlib.rc('font', **font)
 

@@ -19,12 +19,15 @@ from sklearn.preprocessing import MinMaxScaler as Normalize
 from sklearn.linear_model import LinearRegression as LinearRegression
 import scipy.stats as stats
 import warnings
+import logging
+
+logging.getLogger('matplotlib.font_manager').disabled = True
 
 warnings.filterwarnings("ignore")
 
 
 font = {'weight' : 'normal',
-        'size'   : 18}
+        'size'   : 16}
 
 matplotlib.rc('font', **font)
 
@@ -695,7 +698,7 @@ for isyn in range(1,201):
 plt.xlabel('Time since stimulus onset (ms)')
 plt.ylabel('Compartment Vm (mV)')
 plt.xlim([-20, 150])
-plt.legend(legend_str)
+# plt.legend(legend_str)
 plt.title('Supp.Figure 1C')
 fig.set_tight_layout(True)
 figManager = plt.get_current_fig_manager()
@@ -724,7 +727,7 @@ for isyn in range(1,201):
 plt.xlabel('Time since stimulus onset (ms)')
 plt.ylabel('Compartment Vm (mV)')
 plt.xlim([-20, 150])
-plt.legend(legend_str)
+# plt.legend(legend_str)
 plt.title('Supp.Figure 1D')
 fig.set_tight_layout(True)
 figManager = plt.get_current_fig_manager()

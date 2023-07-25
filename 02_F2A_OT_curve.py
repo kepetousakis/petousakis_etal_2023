@@ -4,6 +4,12 @@ from copy import deepcopy as dcp
 import matplotlib.pyplot as plt
 import Code_General_Nassi_functions as nf
 import matplotlib as mpl
+import warnings
+import logging
+
+logging.getLogger('matplotlib.font_manager').disabled = True
+
+warnings.filterwarnings("ignore")
 
 font = {'family' : 'normal',
         'weight' : 'normal',

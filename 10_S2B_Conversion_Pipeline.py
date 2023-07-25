@@ -6,10 +6,16 @@ from copy import deepcopy as dcp
 import scipy.ndimage as scp
 from numpy import exp as exp
 import matplotlib as mpl
+import warnings
+import logging
+
+logging.getLogger('matplotlib.font_manager').disabled = True
+
+warnings.filterwarnings("ignore")
 
 font = {'family' : 'normal',
         'weight' : 'normal',
-        'size'   : 18}
+        'size'   : 16}
 
 mpl.rc('font', **font)
 

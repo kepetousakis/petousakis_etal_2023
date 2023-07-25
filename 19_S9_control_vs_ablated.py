@@ -3,7 +3,8 @@ import Code_General_utility_spikes_pickling as util
 from copy import deepcopy as dcp
 import matplotlib.pyplot as plt
 import Code_General_Nassi_functions as nf
-import os
+
+__RES_DPI = 48
 
 _CND = 600
 _THRESHOLD = -20 
@@ -90,7 +91,7 @@ if _ALL_NEURONS:
 
 	print(f'Plotting tuning curve for disparity {_DISP}...')
 
-	fig = plt.figure()
+	fig = plt.figure(dpi = __RES_DPI)
 	fig.set_tight_layout(True)
 
 	if len(a_rates) == 0 or len(a_errors) == 0:
@@ -119,7 +120,8 @@ if _ALL_NEURONS:
 	
 	plt.errorbar(x_axis, y_axis[_TRANSFORM_VECTOR], y_errors[_TRANSFORM_VECTOR], c='r', capsize=4)
 	plt.xticks(x_axis)
-	plt.title(f'Pref {nrn_pref}, OSI {nrn_OSI:.5f}, width {nrn_width}, condition "{affix}"')
+	# plt.title(f'Pref {nrn_pref}, OSI {nrn_OSI:.5f}, width {nrn_width}, condition "{affix}"')
+	plt.title('Supplementary Figure 9')
 	plt.ylim([0,2.2])
 	if normalize:
 		plt.ylim([0,1.2])

@@ -12,6 +12,12 @@ from copy import deepcopy as dcp
 import scipy.stats as stats
 import matplotlib as mpl
 import matplotlib.colors as mcolors
+import warnings
+import logging
+
+logging.getLogger('matplotlib.font_manager').disabled = True
+
+warnings.filterwarnings("ignore")
 
 font = {'family' : 'normal',
         'weight' : 'normal',
@@ -308,7 +314,7 @@ for idx_v, verdicts in enumerate(verdicts_all):
 		axs[subplot_indices[idx_v][0],subplot_indices[idx_v][1]].set_xticks(x)
 		axs[subplot_indices[idx_v][0],subplot_indices[idx_v][1]].set_xticklabels(labels)
 		axs[subplot_indices[idx_v][0],subplot_indices[idx_v][1]].set_ylim([0,1])
-		axs[subplot_indices[idx_v][0],subplot_indices[idx_v][1]].text(0.6, 0.9, f'N={total_spikes_list[ic]:.0f}',ha='center', fontsize=18)
+		axs[subplot_indices[idx_v][0],subplot_indices[idx_v][1]].text(0.6, 0.9, f'N={total_spikes_list[ic]:.0f}',ha='center', fontsize=16)
 		
 		
 		autolabel(rects_this,axs[subplot_indices[idx_v][0],subplot_indices[idx_v][1]],25)
