@@ -532,9 +532,51 @@ if __name__ == '__main__':
 # 	fig.set_tight_layout(True)
 # 	figManager = plt.get_current_fig_manager()
 # 	figManager.window.showMaximized()
+
+	# ===== Test: compare high branch-order apicals with basals =====
+	exclude_outlier = True
+	bo_thr = 3
+	range_basals = [x for x in range(0,7)]
+	if exclude_outlier:
+		range_basals.remove(3) # parent branch of sole bifurcation  
+	range_apicals = [x for x in range(7,50)]
+	bo_basals = [dendrite_information[compartment_names[x]]['order'] for x in range_basals]
+	bo_apicals = [dendrite_information[compartment_names[x]]['order'] for x in range_apicals]
+	high_bo_apicals = [x for x in range_apicals if dendrite_information[compartment_names[x]]['order']>bo_thr]
+
+	adata = np.array(amp_data[:,2])
+
+	mean_basals = np.mean(adata[range_basals])
+	mean_apicals = np.mean(adata[high_bo_apicals])
+
+	tval,pval = stats.ttest_ind(adata[range_basals], adata[high_bo_apicals], equal_var = assume_equal_variances)
+
+	print(f'[Branch order] Basal mean: {mean_basals:.04f} +/- {np.std(adata[range_basals]):.04f}{" (excl.basal3)" if exclude_outlier else ""} | Apical mean (BO>{bo_thr}): {mean_apicals:.04f} +/- {np.std(adata[high_bo_apicals]):.04f} | p-value {pval:.04f} | {"*" if pval<0.05 else "NS"}')
+
+
+	# ===== Test: compare high distance apicals with basals =====
+	exclude_outlier = True
+	range_basals = [x for x in range(0,7)]
+	if exclude_outlier:
+		range_basals.remove(3) # parent branch of sole bifurcation  
+	range_apicals = [x for x in range(7,50)]
+	dist_basals = [dendrite_information[compartment_names[x]]['distance'] for x in range_basals]
+	dist_apicals = [dendrite_information[compartment_names[x]]['distance'] for x in range_apicals]
+	dist_thr = np.max(dist_basals)
+	high_dist_apicals = [x for x in range_apicals if dendrite_information[compartment_names[x]]['distance']>dist_thr]
+
+	adata = np.array(amp_data[:,2])
+
+	mean_basals = np.mean(adata[range_basals])
+	mean_apicals = np.mean(adata[high_dist_apicals])
+
+	tval,pval = stats.ttest_ind(adata[range_basals], adata[high_dist_apicals], equal_var = assume_equal_variances)
+
+	print(f'[Distance] Basal mean: {mean_basals:.04f} +/- {np.std(adata[range_basals]):.04f} {" (excl.basal3)" if exclude_outlier else ""}  | Apical mean (d>{dist_thr:.01f} um): {mean_apicals:.04f} +/- {np.std(adata[high_dist_apicals]):.04f} | p-value {pval:.04f} | {"*" if pval<0.05 else "NS"}')
 	
 	
 	# ===== Distance-normalized attenuation between apical and basal dendrites =====
+	override_filtering_forDistance = True
 	range_basals = [x for x in range(0,7)]
 	range_apicals = [x for x in range(7,50)]
 	dist_basals = [dendrite_information[compartment_names[x]]['distance'] for x in range_basals]
@@ -543,8 +585,22 @@ if __name__ == '__main__':
 	data_basals = np.array(dist_basals)
 	data_apicals = np.array(dist_apicals)
 	
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Attenuation as a function of distance from the soma',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	if override_filtering_forDistance:
+		fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Supp.Fig.8E (Attenuation vs distance from the soma)',range_std_mult=range_std_mult,filter_trunk_atypical=False, filter_non_corresponding=False, assume_equal_variances=assume_equal_variances)
+	else:
+		fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Supp.Fig.8E (Attenuation vs distance from the soma)',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 
+
+	# ===== Branch-order-normalized attenuation between apical and basal dendrites =====
+	range_basals = [x for x in range(0,7)]
+	range_apicals = [x for x in range(7,50)]
+	bo_basals = [dendrite_information[compartment_names[x]]['order'] for x in range_basals]
+	bo_apicals = [dendrite_information[compartment_names[x]]['order'] for x in range_apicals]
+
+	data_basals = np.array(bo_basals)
+	data_apicals = np.array(bo_apicals)
+	
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Supp.Fig.8F (Attenuation vs branch order)',range_std_mult=range_std_mult,filter_trunk_atypical=False, filter_non_corresponding=False, assume_equal_variances=assume_equal_variances)
 	
 
 	# ===== Length-normalized attenuation between apical and basal dendrites =====
@@ -554,7 +610,7 @@ if __name__ == '__main__':
 	data_basals = np.array(len_basals)
 	data_apicals = np.array(len_apicals)
 	
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Supplementary Figure 8B',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Supp.Fig.8B (Attenuation vs. length)',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 
 
 	# ===== Diameter-normalized attenuation between apical and basal dendrites =====
@@ -564,7 +620,7 @@ if __name__ == '__main__':
 	data_basals = np.array(diam_basals)
 	data_apicals = np.array(diam_apicals)
 
-	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Supplementary Figure 8A',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
+	fig = visualize_compare_data(amp_data, data_apicals, data_basals, title_text='Supp.Fig.8A (Attenuation vs. diameter)',range_std_mult=range_std_mult,filter_trunk_atypical=filter_trunk_atypical, filter_non_corresponding=filter_non_corresponding, assume_equal_variances=assume_equal_variances)
 
 
 	# ===== ELC-normalized attenuation between apical and basal dendrites =====
