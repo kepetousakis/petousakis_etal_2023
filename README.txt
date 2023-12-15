@@ -1,4 +1,5 @@
 This repository and the folders therein contain the code and data required to reproduce the figures that illustrate data and results in the manuscript by Petousakis et al., 2023.
+The manuscript has been accepted and published in eLife: https://elifesciences.org/articles/91627
 
 The reproduction of the figures requires Anaconda Python to be installed on the system, and the repository files to be downloaded.
 Anaconda Python can be found and downloaded from the following URL:  https://www.anaconda.com/products/distribution
